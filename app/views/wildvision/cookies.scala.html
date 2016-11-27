@@ -1,0 +1,44 @@
+@(optout: Boolean, dnt: Boolean)
+@main("Cookies", "", "cookies") {
+	@if(optout) {
+        <p>You are currently opted out of receiving any cookies from Wildvision.tv directly.</p>
+        <p>We have also switched off Google Analytics and have hidden our various Share and Like badges.</p>
+        <p>
+            @if(dnt) {
+                This is because your browser is set to 'Do Not Track'.
+            } else {
+                <a href="/cookies/optin">Click here</a> if you wish to opt back in.
+            }
+        </p>
+	} else {
+        <p>This website uses cookies to maintain login state for <a title="Wildvision.tv Presenters" href="/presenters/">Presenters</a>, to remember your last film sort selection, and to facilitate <a target="_blank" href="https://www.google.co.uk/analytics/">Google Analyics</a> and <a target="_blank" href="http://www.sharethis.com/">ShareThis buttons</a>.</p>
+        <p>If you wish to opt out of these services whilst visiting this site, we can set one persistent cookie on your current browser which will instruct us to not load their scripts. <a href="/cookies/optout">Click here to opt out</a>.</p>
+	}
+    <p>This website @if(optout) { may however include } else { also includes } scripts and iframes from third party websites, which may set cookies on their own domains:</p>
+    <div>
+        <h4>Flash-based videos:</h4>
+        <ul>
+            <li><a target="_blank" href="https://www.google.com/intl/en/policies/technologies/cookies/">YouTube</a></li>
+            <li><a target="_blank" href="https://vimeo.com/privacy">Vimeo</a></li>
+        </ul>
+        <h4>Maps:</h4>
+        <ul>
+            <li><a target="_blank" href="https://www.google.com/intl/en_uk/policies/">Google</a></li>
+        </ul>
+        <h4>Sharing badges:</h4>
+        <ul>
+            <li><a target="_blank" href="http://www.sharethis.com/pri.html">ShareThis</a></li>
+            <li><a target="_blank" href="https://www.google.com/intl/en_uk/policies/">Google</a></li>
+            <li><a target="_blank" href="https://www.facebook.com/help/cookies">Facebook</a></li>
+            <li><a target="_blank" href="https://twitter.com/privacy">Twitter</a></li>
+            <li><a target="_blank" href="https://www.scorecardresearch.com/privacy.aspx">ScorecardResearch</a></li>
+        </ul>
+        <h4>Subscription service:</h4>
+        <ul>
+            <li><a target="_blank" href="http://mailchimp.com/legal/privacy/">MailChimp</a></li>
+        </ul>
+    </div>
+    <p>Please refer to these sites' policies for more information or to opt out of their cookie policy.</p>
+    <p>If you have your browser set to exclude third party cookies then you are opted out by implication.</p>
+    <p>Please also refer to Wildvision.tv's <a href="/privacy/">Privacy</a> page for further information.</p>
+}

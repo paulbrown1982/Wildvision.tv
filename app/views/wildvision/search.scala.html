@@ -1,0 +1,49 @@
+@(results: Option[SearchResults] = None)
+
+@main("Search Wildvision.tv", "", "search") {
+    @results.fold {
+        <form action="/search" method="GET">
+            <input name="q" type="text" placeholder="e.g. osprey"/>
+            <input type="submit" value="Search"/>
+        </form>
+    } { results =>
+        <h2>Results for: @results.query</h2>
+        <search-results>
+            <section class="films">
+            @results.films.map { filmView =>
+                <film class="in-grid">
+                    <a href="@filmView.film.path" class="film-image">
+                        <img src="@filmView.film.film_image"/>
+                        <overlay>
+                            <div class="film-title">@filmView.film.film_name</div>
+                            <div class="film-caption">By @filmView.presenters.map(_.name).mkString(" and ")</div>
+                        </overlay>
+                    </a>
+                </film>
+            }
+            </section>
+            <section class="presenters">
+            @results.presenters.map { presenterView =>
+                <presenter class="in-grid">
+                    <a href="@presenterView.presenter.path" class="presenter-image">
+                        <img src="@presenterView.presenter.picture_url"/>
+                        <overlay>
+                            <div class="presenter-name">@presenterView.presenter.name</div>
+                        </overlay>
+                    </a>
+                </presenter>
+            }
+            </section>
+            <section class="newsletters">
+            @results.newsletters.map { newsletter =>
+                <newsletter class="in-grid">
+                    <a href="@newsletter.newsletter.path" class="newsletter-image">
+                        <img src="@newsletter.newsletter.image_src"/>
+                        <overlay>@newsletter.newsletter.title</overlay>
+                    </a>
+                </newsletter>
+            }
+            </section>
+        </search-results>
+    }
+}

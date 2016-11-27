@@ -1,0 +1,17 @@
+@import views.NewsletterView
+@(newsletters: Seq[NewsletterView])
+
+@main("Subscribe to Wildvision.tv", "", "subscribe") {
+
+    @fragments.signupForm()
+
+    <h3>Newsletter Archives</h3>
+    @newsletters.map { newsletter =>
+        <newsletter class="in-grid">
+            <a href="@newsletter.newsletter.path" class="newsletter-image">
+                <img src="@newsletter.newsletter.image_src"/>
+                <overlay>@newsletter.newsletter.title</overlay>
+            </a>
+        </newsletter>
+    }
+}

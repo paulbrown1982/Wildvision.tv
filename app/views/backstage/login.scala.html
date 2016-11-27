@@ -1,0 +1,12 @@
+@import controllers.BackstageProperties.privateEmailAddresKey
+@(error: Option[String])
+@main("Wildvision.tv Backstage", "all", "backstage") {
+    <form method="POST" action="@routes.Backstage.login().url">
+        @error.map { message =>
+            <p class="error">@message</p>
+        }
+        <label for="pea">Please enter your registered email address to receive a backstage pass: </label>
+        <input type="email" name="@privateEmailAddresKey" value=""/>
+        <input type="submit" value="Next"/>
+    </form>
+}

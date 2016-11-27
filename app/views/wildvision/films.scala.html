@@ -1,0 +1,49 @@
+@import views.FilmView
+@import views.TagCount
+@import Seq.empty
+
+@(films: Seq[FilmView], subnav: String, filmTagCounts: Seq[TagCount] = empty, top10Tags: Seq[TagCount] = empty)
+
+@main(s"${subnav.capitalize} Wildvision.tv Films", subnav, "film") {
+    @films.map { filmView =>
+        <film class="in-grid">
+            <a href="@filmView.film.path" class="film-image">
+                <img src="@filmView.film.film_image"/>
+                <overlay>
+                    <img class="presenter-image-thumb" src="@filmView.presenters.head.picture_url" title="@filmView.presenters.head.name"/>
+                    <div class="film-title">@filmView.film.film_name</div>
+                    <div class="film-caption">
+                        @if(subnav == "all"|| subnav == "trending") {
+                            By <span title="@filmView.presenters.map(_.name).mkString(" and ")">multiple presenters</span>
+                        }
+                        @if(subnav == "latest") {
+                            Published @filmView.published
+                        }
+                        @if(subnav == "longest" || subnav == "shortest") {
+                            Duration: @filmView.duration
+                        }
+                        @if(subnav == "popular") {
+                            @filmView.viewings views
+                        }
+                    </div>
+                </overlay>
+            </a>
+        </film>
+    }
+    @if(top10Tags.nonEmpty) {
+        <section class="top-10-film-tags">
+            <h3>Top 10 Film Tags:</h3>
+            @top10Tags.map { filmTagCount =>
+                <film-tag><a href="/films/tagged/with/@{filmTagCount.tag}" title="@filmTagCount.size films">#@filmTagCount.tag</a></film-tag>
+            }
+        </section>
+    }
+    @if(filmTagCounts.nonEmpty) {
+        <section class="all-film-tags">
+            <h3>All Film Tags:</h3>
+            @filmTagCounts.map { filmTagCount =>
+                <film-tag><a href="/films/tagged/with/@{filmTagCount.tag}" title="@filmTagCount.size films" style="font-size: 1.@{filmTagCount.size}em">#@filmTagCount.tag</a></film-tag>
+            }
+        </section>
+    }
+}

@@ -1,0 +1,296 @@
+html {
+    background-color: lightseagreen;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-rendering: geometricPrecision;
+}
+
+body {
+    color: #222222;
+    margin: 0;
+    min-width: 320px;
+    padding: 0;
+    line-height: 1.2em;
+}
+
+a {
+    color: #111111;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+h1, h2 {
+    margin: 0;
+    line-height: 1.2em;
+}
+
+h3, h4, h5, h6 {
+    margin: 0;
+    line-height: 2em;
+}
+
+.side-by-side {
+    display: table;
+    margin-top: 10px;
+}
+
+.side-by-side aside {
+    display: block;
+    min-width: 300px;
+    vertical-align: top;
+}
+
+.in-grid {
+    float: left;
+    overflow: hidden;
+    position: relative;
+}
+
+iframe {
+    border: 0;
+}
+
+menu,
+menu > menu {
+    background-color: seagreen;
+    display: block;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    white-space: nowrap;
+}
+
+menu a {
+    display: inline-block;
+    padding: 10px;
+    text-decoration: none;
+}
+
+menu a:hover {
+    text-decoration: underline;
+}
+
+menu .selected {
+    background-color: mediumseagreen;
+}
+
+menu .selected-submenu {
+    background-color: darkseagreen;
+}
+
+menu > menu {
+    background-color: darkseagreen;
+}
+
+menu > menu .selected {
+    background-color: mediumseagreen;
+}
+
+header {
+    background-color: mediumseagreen;
+    clear: both;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+.page {
+    background-color: darkseagreen;
+    overflow: hidden;
+    padding: 10px 0;
+}
+
+.page section {
+    display: block;
+    overflow: hidden;
+}
+
+.centred {
+    margin: 0 auto;
+    width: 300px;
+}
+
+.about-tab {
+    padding-left: 0;
+}
+
+.home-tab {
+    background-color: lightseagreen;
+}
+
+img {
+    text-indent: -100000px;
+    border: 0;
+    height: 100%;
+    width: 100%;
+}
+
+presenter {
+    display: block;
+    min-width: 300px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.presenter-image {
+    background-color: red;
+    display: block;
+    float: left;
+    height: 300px;
+    position: relative;
+    width: 300px;
+}
+
+.presenter-image overlay {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+}
+
+.presenter-name {
+    line-height: 2.4em;
+}
+
+.presenter-bio {
+    margin-left: 300px;
+    padding: 0 0 0 10px;
+}
+
+.presenter-films {
+    height: 300px;
+    margin-left: 300px;
+    overflow: hidden;
+}
+
+.presenter-films--busiest,
+.presenter-films--oldest,
+.presenter-films--newest {
+    overflow: visible;
+}
+
+.presenter-films film .film-image {
+    height: 150px;
+    width: 300px;
+}
+
+.presenter-portfolo {
+    clear: both;
+}
+
+.presenter-portfolo .presenter-films {
+    height: auto;
+    margin-left: 0;
+}
+
+film iframe {
+    background-color: brown;
+    height: 56%;
+    width: 100%;
+}
+
+.film-image {
+    background-color: blue;
+    border: 0;
+    display: block;
+    height: 168px;
+    width: 300px;
+}
+
+.film-image overlay {
+    background-color: brown;
+    bottom: 0;
+    left: 0;
+    height: 3.6em;
+    right: 0;
+    overflow: hidden;
+    position: absolute;
+}
+
+.film-image .presenter-image-thumb {
+    background-color: orange;
+    float: left;
+    height: 3.6em;
+    margin-right: 4px;
+    width: 3.6em;
+}
+
+.film-title {
+    overflow: hidden;
+    max-height: 2.4em;
+}
+
+.film-caption {
+    font-style: italic;
+    overflow: hidden;
+    height: 1.2em;
+}
+
+film-tag {
+    background-color: lightseagreen;
+    display: inline-block;
+    padding: 2px;
+    border: 1px solid lightseagreen;
+    border-radius: 4px;
+    margin-bottom: 2px;
+}
+
+film-tag a {
+    text-decoration: none;
+    line-height: 1.1em;
+}
+
+newsletter {
+
+}
+
+newsletter .newsletter-image {
+    display: block;
+    height: 169px;
+    width: 300px;
+}
+
+newsletter .mobile-alternative {
+    display: block;
+}
+
+newsletter iframe {
+    display: none;
+    height: 100%;
+    width: 100%;
+}
+
+newsletter overlay {
+    background-color: seagreen;
+    bottom: 0;
+    left: 0;
+    line-height: 2.4em;
+    right: 0;
+    opacity: 0.9;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+}
+
+.all-film-tags {
+    float: left;
+    width: 80%;
+}
+
+.top-10-film-tags {
+    float: left;
+    margin-right: 20px;
+}
+
+.top-10-film-tags film-tag {
+    display: block;
+}
+
+footer {
+    background-color: mediumseagreen;
+    line-height: 1.2em;
+    padding: 10px;
+}

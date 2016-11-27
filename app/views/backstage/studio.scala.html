@@ -1,0 +1,11 @@
+@import helper._
+@import views.backstage.BackstageView.presenterForm
+@(presenter: Presenter)(implicit messages: Messages)
+@main(s"Wildvision.tv Backstage - ${presenter.name}'s Studio", "all", "backstage") {
+    <h1>@{presenter.name}'s Studio</h1>
+    @form(action = routes.Backstage.update()) {
+        @inputText(presenterForm("name"))
+        @inputText(presenterForm("bio"))
+    }
+    <a href="@routes.Backstage.logout().url">Log out</a>
+}

@@ -1,0 +1,17 @@
+@import views.Formatters.formatPublishedDate
+
+@(films: Seq[Film])
+
+<div class="presenter-films">
+    @films.map { film =>
+        <film class="in-grid">
+            <a href="@film.path" class="film-image">
+                <img src="@film.film_image"/>
+                <overlay>
+                    <div class="film-title">@film.film_name</div>
+                    <div class="film-caption">Published @formatPublishedDate(film.film_published_date)</div>
+                </overlay>
+            </a>
+        </film>
+    }
+</div>

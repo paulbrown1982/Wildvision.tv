@@ -1,0 +1,28 @@
+@import views.NewsletterView
+@(newsletterView: NewsletterView)
+
+@main(s"Wildvision.tv Newsletter: ${newsletterView.newsletter.title}", "", "newsletter", newsletterView.entityId) {
+    <time>Published: @newsletterView.published</time>
+    <section class="side-by-side">
+        <aside>
+            <newsletter>
+                <div class="mobile-alternative">
+                    <p>Tap here: <a href="@newsletterView.newsletter.url" target="_blank">@newsletterView.newsletter.url</a></p>
+                    <hr/>
+                </div>
+                <iframe src="@newsletterView.newsletter.url"></iframe>
+            </newsletter>
+        </aside>
+        <aside>
+            @newsletterView.otherNewsletters.map { newsletter =>
+                <newsletter class="in-grid">
+                    <a href="@newsletter.path" class="newsletter-image">
+                        <img src="@newsletter.image_src"/>
+                        <overlay>@newsletter.title</overlay>
+                    </a>
+                </newsletter>
+            }
+        </aside>
+    </section>
+
+}

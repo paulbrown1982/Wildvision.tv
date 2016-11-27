@@ -1,0 +1,17 @@
+@import views.FilmView
+@import models.Types.Tag
+@(films: Seq[FilmView], tagName: Tag)
+
+@main(s"Wildvision.tv Films tagged with: $tagName", "tagged", "film") {
+    @films.map { filmView =>
+        <film class="in-grid">
+            <a href="@filmView.film.path" class="film-image">
+                <img src="@filmView.film.film_image"/>
+                <overlay>
+                    <div class="film-title">@filmView.film.film_name</div>
+                    <div class="film-caption">By @filmView.presenters.map(_.name).mkString(" and ")</div>
+                </overlay>
+            </a>
+        </film>
+    }
+}

@@ -1,0 +1,36 @@
+@import views.FilmView
+@import views.Formatters.toHtml
+
+@(filmView: FilmView)
+
+@main(s"Wildvision.tv Film: ${filmView.film.film_name}", "all", "film", filmView.entityId) {
+    <film>
+        <iframe src="@filmView.filmEmbedUrl"></iframe>
+    </film>
+    <p>@toHtml(filmView.film.film_description)</p>
+    <details>
+        <h3>Published:</h3>
+        <time>@filmView.published ago</time>
+        <h3>Views:</h3>
+        <p>@filmView.viewings</p>
+        <h3>Duration:</h3>
+        <p>@filmView.duration</p>
+        <h3>Tags:</h3>
+        @filmView.tags.map { filmTag =>
+            <film-tag><a href="/films/tagged/with/@filmTag.tag">#@filmTag.tag</a></film-tag>
+        }
+    </details>
+    <div class="film-presenters">
+        <h3>Presenter@if(filmView.presenters.length > 1){s}</h3>
+        @filmView.presenters.map { presenter =>
+            <presenter id="presenter-@presenter.presenter_id">
+                <a href="@presenter.path" class="presenter-image">
+                    <img src="@presenter.picture_url"/>
+                    <overlay>
+                        <div class="presenter-name">@presenter.name</div>
+                    </overlay>
+                </a>
+            </presenter>
+        }
+    </div>
+}

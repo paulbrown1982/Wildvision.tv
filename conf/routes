@@ -1,0 +1,82 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Wildvision.index
+
+GET     /healthcheck                controllers.Application.healthcheck
+
+GET     /update                     controllers.Application.update
+
+GET     /login                      controllers.Backstage.index
+
+POST    /login                      controllers.Backstage.login
+
+GET     /logout                     controllers.Backstage.logout
+
+GET     /backstage                  controllers.Backstage.studio
+
+POST    /backstage                  controllers.Backstage.update
+
+GET     /about                      controllers.Wildvision.about
+
+GET     /cookies                    controllers.Wildvision.cookies
+
+GET     /cookies/optin              controllers.Wildvision.cookiesOptIn
+
+GET     /cookies/optout             controllers.Wildvision.cookiesOptOut
+
+GET     /films                      controllers.Wildvision.top10MostRecentFilms
+
+GET     /films/popular              controllers.Wildvision.top10MostPopularFilms
+
+GET     /films/trending             controllers.Wildvision.top10TrendingFilms
+
+GET     /films/longest              controllers.Wildvision.top10LongestFilms
+
+GET     /films/shortest             controllers.Wildvision.top10ShortestFilms
+
+GET     /films/all                  controllers.Wildvision.films
+
+GET     /films/tagged               controllers.Wildvision.filmsTagged
+
+GET     /films/tagged/with/*tag     controllers.Wildvision.filmsTaggedWith(tag)
+
+GET     /presenters                 controllers.Wildvision.presenters
+
+GET     /presenter/*slug            controllers.Wildvision.presenter(slug)
+
+GET     /film/*slug                 controllers.Wildvision.film(slug)
+
+GET     /subscribe                  controllers.Wildvision.subscribe
+
+GET     /subscribe/thankyou         controllers.Wildvision.subscribe
+
+GET     /newsletter/*slug           controllers.Wildvision.newsletter(slug)
+
+GET     /search                     controllers.Wildvision.search(q: Option[String])
+
+GET     /sitemap                    controllers.Wildvision.sitemap
+
+GET     /privacy                    controllers.Wildvision.privacy
+
+GET     /blog                       controllers.Wildvision.blogHomepage
+
+GET     /blog/*path                 controllers.Wildvision.blog(path: String)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+POST    /film/view/*id              controllers.Wildvision.insights(entity = "FILM", insightType = "VIEWED", id)
+
+POST    /film/impression/*id        controllers.Wildvision.insights(entity = "FILM", insightType = "IMPRESSED", id)
+
+POST    /presenter/impression/*id   controllers.Wildvision.insights(entity = "FILM", insightType = "IMPRESSED", id)
+
+POST    /newsletter/impression/*id  controllers.Wildvision.insights(entity = "NEWSLETTER", insightType = "IMPRESSED", id)
+
+HEAD    /*notfound                  controllers.Wildvision.notFound(notfound)
+GET     /*notfound                  controllers.Wildvision.notFound(notfound)
+POST    /*notfound                  controllers.Wildvision.notFound(notfound)
+

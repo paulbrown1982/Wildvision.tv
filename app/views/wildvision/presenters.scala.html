@@ -1,0 +1,17 @@
+@import views.PresenterView
+
+@(presenters: Seq[PresenterView], subnav: String)
+
+@main("Wildvision.tv Presenters", subnav, "presenter") {
+    @presenters.map { presenterView =>
+        <presenter id="presenter-@presenterView.presenter.presenter_id">
+            <a href="@presenterView.presenter.path" class="presenter-image">
+                <img src="@presenterView.presenter.picture_url"/>
+                <overlay>
+                    <div class="presenter-name">@presenterView.presenter.name</div>
+                </overlay>
+            </a>
+            @fragments.presenterFilms(presenterView.films)
+        </presenter>
+    }
+}

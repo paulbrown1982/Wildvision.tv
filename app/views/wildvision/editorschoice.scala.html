@@ -1,0 +1,12 @@
+@import views.EditorsChoiceFilmView
+@import views.Formatters.toHtml
+@(editorsChoiceFilm: EditorsChoiceFilmView)
+
+@main("Wildvision.tv Editor's Choice", "", "editorschoice", editorsChoiceFilm.filmView.entityId) {
+    <h2>@editorsChoiceFilm.filmView.film.film_name</h2>
+    <p>Presented by: @toHtml(editorsChoiceFilm.filmView.presenters.map(_.anchor).mkString(" and "))</p>
+    <p>@toHtml(editorsChoiceFilm.description)</p>
+    <film>
+        <iframe src="@editorsChoiceFilm.filmView.filmEmbedUrl"></iframe>
+    </film>
+}

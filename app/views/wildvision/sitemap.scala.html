@@ -1,0 +1,66 @@
+@import models.Types.Tag
+@(films: Seq[Film], presenters: Seq[Presenter], newsletters: Seq[Newsletter], tagNames: Seq[Tag])
+@main("Wildvision.tv Sitemap", "", "sitemap") {
+    <article id="sitemap">
+        <section>
+            <h3>Home</h3>
+            <ul>
+                <li><a title="Wildvision.tv Editor's Choice" href="/">Editor's Choice</a></li>
+            </ul>
+        </section>
+        <section>
+            <h3>Blog</h3>
+            <ul>
+                <li><a title="Wildvision.tv Blog" href="/blog">Wildvision.tv Blog</a></li>
+            </ul>
+        </section>
+        <section>
+            <h3>Presenters</h3>
+            <ul>
+			@for(presenter <- presenters) {
+                <li>
+                    <a title="Wildvision.tv Presenter: @presenter.name" href="@presenter.path">@presenter.name</a>
+                </li>
+			}
+            </ul>
+        </section>
+        <section>
+            <h3>Films</h3>
+            <ul>
+			@for(film <- films) {
+                <li>
+                    <a title="Wildvision.tv Film: @film.film_name" href="@film.path">@film.film_name</a>
+                </li>
+			}
+            </ul>
+            <h3>Film tags</h3>
+            <ul>
+            @for(tagName <- tagNames) {
+                <li><a title="Wildvision.tv Films tagged with: @tagName" href="/films/tagged/with/@tagName">@tagName</a></li>
+            }
+            </ul>
+        </section>
+        <section>
+            <h3>Subscribe</h3>
+            <ul>
+                <li><a title="Subscribe to Wildvision.tv" href="/subscribe">Subscribe to Wildvision.tv</a></li>
+                <li>
+                    <h3>Newsletter Archives</h3>
+                    <ul>
+                    @for(newsletter <- newsletters) {
+                        <li>
+                            <a title="Wildvision.tv Newsletter: @newsletter.title" href="@newsletter.path">@newsletter.title</a>
+                        </li>
+                    }
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h3>Search</h3>
+            <ul>
+                <li><a title="Search Wildvision.tv" href="/search">Search Wildvision.tv</a></li>
+            </ul>
+        </section>
+    </article>
+}

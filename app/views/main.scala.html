@@ -1,0 +1,85 @@
+@import org.joda.time.LocalDate.now
+@(title: String, subnav: String, listing: String, listingId: String = "")(content: Html)
+<!DOCTYPE html>
+@homeClass = {
+    @if(listing != "film" && listing != "presenter" && listing != "blog" && listing != "subscribe" && listing != "newsletter" && listing != "search" && listing !="backstage") {
+        selected
+    } else {
+        home-tab
+    }
+}
+<html>
+    <head>
+        <title>@title</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta http-equiv="cleartype" content="on" />
+        <meta name="msapplication-TileColor" content="#EEEEEE" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+        <meta name="apple-mobile-web-app-title" content="Wildvision.tv" />
+        <link rel="shortcut icon" type="image/png" href='@routes.Assets.at("images/favicon.png")' />
+        <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/main.css")' />
+        <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/responsive.css")' />
+    </head>
+    <body>
+        <menu>
+            <div class="centred">
+                <a href="/" class="@homeClass">Home</a>
+                <a href="/films" class="@if(listing == "film"){selected-submenu}">Films</a>
+                <a href="/presenters" class="@if(listing == "presenter"){selected}">Presenters</a>
+                <a href="/blog" class="@if(listing == "blog"){selected}">Blog</a>
+                <a href="/subscribe" class="@if(listing == "subscribe" || listing == "newsletter"){selected}">Subscribe</a>
+                <a href="/search" class="@if(listing == "search"){selected}">Search</a>
+                <a href="/backstage" class="@if(listing == "backstage"){selected}">Backstage</a>
+            </div>
+            @if(subnav != "") {
+                <menu>
+                @if(listing == "film") {
+                    <div class="centred">
+                        <a href="/films/all" class="@if(subnav == "all") {selected}">All</a>
+                        <a href="/films" class="@if(subnav == "latest") {selected}">Latest</a>
+                        <a href="/films/trending" class="@if(subnav == "trending") {selected}">Trending</a>
+                        <a href="/films/popular" class="@if(subnav == "popular") {selected}">Popular</a>
+                        <a href="/films/longest" class="@if(subnav == "longest") {selected}">Longest</a>
+                        <a href="/films/shortest" class="@if(subnav == "shortest") {selected}">Shortest</a>
+                        <a href="/films/tagged" class="@if(subnav == "tagged") {selected}">Tagged</a>
+                    </div>
+                }
+                </menu>
+            }
+        </menu>
+        <header>
+            <div class="centred">
+                <h1>@title</h1>
+            </div>
+        </header>
+        <section class="page">
+            <div class="centred">
+                @content
+            </div>
+        </section>
+        <footer>
+            <section class="centred">&copy; Wildvision.tv @now.year.get</section>
+        </footer>
+        <menu>
+            <div class="centred">
+                <a href="/about" class="about-tab">About</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/cookies">Cookies</a>
+                <a href="/sitemap">Sitemap</a>
+            </div>
+        </menu>
+        <script src="@routes.Assets.at("javascripts/jquery-3.1.1.min.js")"></script>
+        <script>
+            var wildvision = {};
+            wildvision['@listing'] = '@listingId';
+            @if(listing == "editorschoice") {
+                wildvision['film'] = '@listingId';
+            }
+        </script>
+        <script src="@routes.Assets.at("javascripts/main.js")"></script>
+    </body>
+</html>
