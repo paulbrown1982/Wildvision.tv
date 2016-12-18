@@ -17,7 +17,9 @@ GET     /logout                     controllers.Backstage.logout
 
 GET     /backstage                  controllers.Backstage.studio
 
-POST    /backstage                  controllers.Backstage.update
+POST    /backstage/presenter        controllers.Backstage.updatePresenter
+
+POST    /backstage/film             controllers.Backstage.updateFilm
 
 GET     /about                      controllers.Wildvision.about
 
