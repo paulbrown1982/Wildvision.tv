@@ -1,0 +1,27 @@
+@import helper._
+@import org.joda.time.DateTime.now
+@import org.joda.time.format.DateTimeFormat
+@import views.backstage.BackstageView.lastUpdatedDateTimePattern
+@import views.backstage.BackstageView.inputHidden
+@(film: Film, filmForm: Form[Film])(implicit messages: Messages)
+<h3>@film.film_name</h3>
+<h4>Last updated: @film.f_lastupdated.toString(DateTimeFormat.mediumDateTime())</h4>
+@form(action = routes.Backstage.update()) {
+    @inputHidden(filmForm("film_id"))
+    <input type="hidden" name="f_lastupdated" value="@now.toString(lastUpdatedDateTimePattern)"/>
+    @select(field = filmForm("live"), options = Seq("0" -> "Inactive", "1" -> "Live"), '_default -> "Please choose...")
+    @inputText(field = filmForm("film_name"))
+    @inputText(field = filmForm("film_image"))
+    @select(
+        field = filmForm("film_host"),
+        options = Seq(
+            "VIMEO" -> "Vimeo",
+            "WILDVISION" -> "Wildvision.tv",
+            "YOUTUBE" -> "YouTube"
+        ),
+        '_default -> "Please choose..."
+    )
+    @inputText(field = filmForm("film_host_id"))
+    @textarea(field = filmForm("film_description"), args = 'rows -> 6)
+    <input type="submit" value="Update Film"/>
+}

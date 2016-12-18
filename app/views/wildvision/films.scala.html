@@ -10,7 +10,9 @@
             <a href="@filmView.film.path" class="film-image">
                 <img src="@filmView.film.film_image"/>
                 <overlay>
-                    <img class="presenter-image-thumb" src="@filmView.presenters.head.picture_url" title="@filmView.presenters.head.name"/>
+                    @if(filmView.presenters.length == 1) {
+                        <img class="presenter-image-thumb" src="@filmView.presenters.head.picture_url" title="@filmView.presenters.head.name"/>
+                    }
                     <div class="film-title">@filmView.film.film_name</div>
                     <div class="film-caption">
                         @if(subnav == "all"|| subnav == "trending") {

@@ -1,0 +1,21 @@
+@import helper._
+@import org.joda.time.DateTime.now
+@import org.joda.time.format.DateTimeFormat
+@import views.backstage.BackstageView.presenterForm
+@import views.backstage.BackstageView.lastUpdatedDateTimePattern
+@import views.backstage.BackstageView.inputHidden
+@(presenter: Presenter)(implicit messages: Messages)
+@filledForm = @{presenterForm.fill(presenter)}
+<h2>Your profile</h2>
+<h4>Last updated: @presenter.p_lastupdated.toString(DateTimeFormat.mediumDateTime())</h4>
+@form(action = routes.Backstage.update()) {
+    @inputHidden(filledForm("presenter_id"))
+    @inputHidden(filledForm("name"))
+    <input type="hidden" name="p_lastupdated" value="@now.toString(lastUpdatedDateTimePattern)"/>
+    @select(field = filledForm("live"), options = Seq("0" -> "Inactive", "1" -> "Live"), '_default -> "Please choose...")
+    @inputText(field = filledForm("private_email_address"), 'type -> "email")
+    @inputText(field = filledForm("twitter_username"))
+    @inputText(field = filledForm("picture_url"))
+    @textarea(field = filledForm("bio"), args = 'rows -> 16)
+    <input type="submit" value="Update Profile"/>
+}

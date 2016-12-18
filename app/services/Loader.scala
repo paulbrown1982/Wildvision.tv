@@ -22,7 +22,7 @@ object Loader {
   private val filmTagParser: RowParser[FilmTag] = Macro.namedParser[FilmTag]
 
   private var renderedView: RenderedView = new RenderedView
-  private var adminService: BackstageService = new BackstageService
+  var adminService: BackstageService = new BackstageService
   private var adminView: BackstageView = new BackstageView(adminService)
 
   def updateView(implicit db: Database, ws: WSClient) = {
