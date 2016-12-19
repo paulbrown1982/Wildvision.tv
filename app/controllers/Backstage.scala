@@ -9,8 +9,7 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.libs.ws.WSClient
 import play.api.mvc.{Action, Controller, Request}
 import play.twirl.api.Html
-import services.Loader
-import services.Loader.{backstageService, backstageView}
+import services.Loader.{backstageService, backstageView, updateView}
 import views.backstage.BackstageView
 
 class Backstage @Inject()(val messagesApi: MessagesApi)(implicit db: Database, system: ActorSystem, ws: WSClient) extends Controller with I18nSupport {
@@ -58,15 +57,15 @@ class Backstage @Inject()(val messagesApi: MessagesApi)(implicit db: Database, s
     }
   }
 
-  def updatePresenter = Action { implicit request =>
+  def updatePresenter() = Action { implicit request =>
     presenterFromSession map { presenter =>
       val presenterForm = BackstageView.presenterForm.bindFromRequest()
       val result = for {
         presenterFromForm <- presenterForm.value
       } yield {
         if (presenter.presenter_id == presenterFromForm.presenter_id) {
-          Loader.backstageService.updatePresenter(presenterFromForm)
-          Loader.updateView
+          backstageService.updatePresenter(presenterFromForm)
+          updateView
           redirectToStudio
         } else {
           OkNoCache(backstageView.studioOf(presenter))
@@ -74,7 +73,30 @@ class Backstage @Inject()(val messagesApi: MessagesApi)(implicit db: Database, s
       }
       result getOrElse {
         presenterForm.errors.foreach { error =>
-          println(error)
+          println(error)  // TOOD
+        }
+        Ok(backstageView.studioOf(presenter))
+      }
+    } getOrElse redirectToIndex
+  }
+
+  def updateFilm() = Action { implicit request =>
+    presenterFromSession map { presenter =>
+      val filmForm = BackstageView.filmForm.bindFromRequest()
+      val result = for {
+        filmFromForm <- filmForm.value
+      } yield {
+        if (backstageService.presenterOwnsFilm(presenter.presenter_id, filmFromForm.film_id)) {
+          backstageService.updatePresenterFilm(filmFromForm)
+          updateView
+          redirectToStudio
+        } else {
+          OkNoCache(backstageView.studioOf(presenter))
+        }
+      }
+      result getOrElse {
+        filmForm.errors.foreach { error =>
+          println(error)  // TOOD
         }
         Ok(backstageView.studioOf(presenter))
       }

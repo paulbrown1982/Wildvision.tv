@@ -48,6 +48,6 @@ object BackstageView {
     )(Film.apply)(Film.unapply)
   )
   def inputHidden(field: Field): Html = Html.apply(
-      "<input id='${field.id}' type='hidden' name='${field.name}' value='${field.value}'/>"
+      s"<input id='${field.id}' type='hidden' name='${field.name}' value='${field.value.mkString}'/>"
   )
 }

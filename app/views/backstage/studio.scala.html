@@ -1,6 +1,8 @@
 @(presenter: Presenter, films: Seq[Film])(implicit messages: Messages)
 @main(s"${presenter.name}'s Wildvision.tv Studio", "all", "backstage") {
-    @backstage.fragments.profile(presenter)
-    @backstage.fragments.films(films)
-    <a href="@routes.Backstage.logout().url">Log out</a>
+    <section id="backstage-studio">
+        @backstage.fragments.profile(presenter)
+        @backstage.fragments.films(films)
+        <a href="@routes.Backstage.logout().url">Log out</a>
+    </section>
 }
