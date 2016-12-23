@@ -1,6 +1,6 @@
 @import views.backstage.BackstageView.filmForm
 @(films: Seq[Film])(implicit messages: Messages)
-<section class="backstage-films">
+<section id="backstage-films">
     <h2>Your films</h2>
     @for(film <- films) {
         <div class="backstage-film">@backstage.fragments.film(film, filmForm.fill(film))</div>

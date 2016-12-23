@@ -1,3 +1,5 @@
+@import views.ModelEnhancements._
+
 @(results: Option[SearchResults] = None)
 
 @main("Search Wildvision.tv", "", "search") {
@@ -13,7 +15,7 @@
             @results.films.map { filmView =>
                 <film class="in-grid">
                     <a href="@filmView.film.path" class="film-image">
-                        <img src="@filmView.film.film_image"/>
+                        <img src="@filmView.imageUrl"/>
                         <overlay>
                             <div class="film-title">@filmView.film.film_name</div>
                             <div class="film-caption">By @filmView.presenters.map(_.name).mkString(" and ")</div>
@@ -26,7 +28,7 @@
             @results.presenters.map { presenterView =>
                 <presenter class="in-grid">
                     <a href="@presenterView.presenter.path" class="presenter-image">
-                        <img src="@presenterView.presenter.picture_url"/>
+                        <img src="@presenterView.imageUrl"/>
                         <overlay>
                             <div class="presenter-name">@presenterView.presenter.name</div>
                         </overlay>

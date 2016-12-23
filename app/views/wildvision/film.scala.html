@@ -1,5 +1,6 @@
 @import views.FilmView
 @import views.Formatters.toHtml
+@import views.ModelEnhancements._
 
 @(filmView: FilmView)
 
@@ -25,7 +26,7 @@
         @filmView.presenters.map { presenter =>
             <presenter id="presenter-@presenter.presenter_id">
                 <a href="@presenter.path" class="presenter-image">
-                    <img src="@presenter.picture_url"/>
+                    <img src="@presenter.imageUrl"/>
                     <overlay>
                         <div class="presenter-name">@presenter.name</div>
                     </overlay>

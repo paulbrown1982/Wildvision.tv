@@ -37,6 +37,15 @@ object Formatters {
   }
 }
 
+object ModelEnhancements {
+  implicit class FilmWithImageUrl(film: Film) {
+    def imageUrl: String = s"https://res.cloudinary.com/wildvision-tv/image/fetch/c_fill,dpr_1.0,fl_progressive,g_center,h_169,w_300/https://wildvision.tv/images/films/${film.film_image}"
+  }
+  implicit class PresenterWithImageUrl(presenter: Presenter) {
+    def imageUrl: String = s"https://res.cloudinary.com/wildvision-tv/image/fetch/c_fill,dpr_1.0,fl_progressive,g_faces,h_300,w_300/https://wildvision.tv/images/presenters/${presenter.picture_url}"
+  }
+}
+
 
 trait Barn {
   def haystack: String
@@ -44,6 +53,8 @@ trait Barn {
 }
 
 case class FilmView(film: Film, presenters: Seq[Presenter], viewings: Int, impressions: Int, tags: Seq[FilmTag]) extends Barn {
+  import ModelEnhancements._
+
   val entityId: String = film.film_id.toString
   val duration: String = durationFormatter.print(standardSeconds(film.duration).toPeriod)
   val published: String = formatPublishedDate(film.film_published_date)
@@ -56,9 +67,12 @@ case class FilmView(film: Film, presenters: Seq[Presenter], viewings: Int, impre
   val haystack = film.toString.toLowerCase
   val name = film.film_name.toLowerCase
   val tagSet = tags.map(_.tag).toSet[Tag]
+  lazy val imageUrl: String = film.imageUrl
 }
 
 case class PresenterView(presenter: Presenter, films: Seq[Film]) extends Barn {
+  import ModelEnhancements._
+
   val entityId: String = presenter.presenter_id.toString
   val asTemplateMapEntry: (Slug, Html)  = presenter.slug -> html.wildvision.presenter(this)
   def withFilmsReversed: PresenterView = this.copy(films = this.films.reverse)
@@ -66,6 +80,7 @@ case class PresenterView(presenter: Presenter, films: Seq[Film]) extends Barn {
   def filmsPublishedThisYear = this.films.filter(_.film_published_date.isBefore(now.minusYears(1)))
   val haystack = presenter.toString.toLowerCase
   val name = presenter.name.toLowerCase
+  lazy val imageUrl: String = presenter.imageUrl
 }
 
 case class EditorsChoiceFilmView(filmView: FilmView, description: String)
@@ -79,4 +94,3 @@ case class NewsletterView(newsletter: Newsletter, otherNewsletters: Seq[Newslett
 }
 
 case class TagCount(tag: Tag, size: Int)
-

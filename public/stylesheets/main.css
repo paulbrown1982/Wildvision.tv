@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 html {
     background-color: lightseagreen;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -102,7 +105,6 @@ header {
 }
 
 .page section {
-    box-sizing: border-box;
     display: block;
     overflow: hidden;
 }
@@ -199,6 +201,10 @@ film iframe {
     display: block;
     height: 168px;
     width: 300px;
+}
+
+.film-image img {
+    /* object-fit: cover; */
 }
 
 .film-image overlay {

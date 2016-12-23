@@ -1,11 +1,12 @@
 @import views.PresenterView
 @import views.Formatters.{formatPublishedDate, toHtml}
+@import views.ModelEnhancements._
 
 @(presenterView: PresenterView)
 
 @main(s"Wildvision.tv Presenter: ${presenterView.presenter.name}", "", "presenter", presenterView.entityId) {
     <presenter id="presenter-@presenterView.presenter.presenter_id">
-        <div class="presenter-image"><img src="@presenterView.presenter.picture_url"/></div>
+        <div class="presenter-image"><img src="@presenterView.imageUrl"/></div>
         <p class="presenter-bio">@toHtml(presenterView.presenter.bio)</p>
         <div class="presenter-portfolo">
             <h3>Films by @presenterView.presenter.name (@presenterView.films.length)</h3>
