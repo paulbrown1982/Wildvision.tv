@@ -2,7 +2,7 @@ name := """Wildvision"""
 
 version := "1.0-SNAPSHOT"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala)
+lazy val root = (project in file(".")).enablePlugins(PlayScala, ElasticBeanstalkPlugin, BuildInfoPlugin)
 
 scalaVersion := "2.11.8"
 
@@ -16,3 +16,10 @@ libraryDependencies ++= Seq(
   "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test
 )
 
+// Docker/Elastic Beanstalk
+maintainer in Docker := "Wildvision.tv Webmaster <webmaster@wildvision.tv>"
+dockerExposedPorts := Seq(9000)
+dockerBaseImage := "java:latest"
+
+// BuildInfoPlugin
+buildInfoPackage := "build"

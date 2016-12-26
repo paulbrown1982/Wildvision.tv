@@ -16,3 +16,11 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-digest" % "1.1.1")
 addSbtPlugin("com.typesafe.sbt" % "sbt-mocha" % "1.1.0")
 
 addSbtPlugin("org.irundaia.sbt" % "sbt-sassify" % "1.4.6")
+
+// Build for Elastic Beanstalk plugins
+
+resolvers += Resolver.url("bintray-kipsigman-sbt-plugins", url("http://dl.bintray.com/kipsigman/sbt-plugins"))(Resolver.ivyStylePatterns)
+
+addSbtPlugin("kipsigman" % "sbt-elastic-beanstalk" % "0.1.4")
+
+addSbtPlugin("com.eed3si9n" % "sbt-buildinfo" % "0.6.1")
