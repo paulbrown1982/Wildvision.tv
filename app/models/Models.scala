@@ -1,5 +1,6 @@
 package models
 
+import controllers.routes
 import models.Types.{FilmId, NewsletterId, PresenterId, Tag}
 import org.joda.time.{DateTime, LocalDate}
 import views.{FilmView, NewsletterView, PresenterView}
@@ -35,7 +36,7 @@ case class Film(live: Char,
                 film_description: String,
                 f_lastupdated: DateTime) {
   val slug = Slug.fromString(film_name)
-  val path = s"/film/${slug.toString}"
+  val path = routes.Wildvision.film(slug.toString).url
 }
 
 case class Presenter(live: Char,
@@ -47,7 +48,7 @@ case class Presenter(live: Char,
                      bio: String,
                      p_lastupdated: DateTime) {
   val slug = Slug.fromString(name)
-  val path = s"/presenter/${slug.toString}"
+  val path = routes.Wildvision.presenter(slug.toString).url
   val anchor = <a href="{path}">{name}</a>.toString.replace("{path}", path)
 }
 
@@ -61,7 +62,7 @@ case class Insight(insight_entity: String, insight_type: String, entity_id: Int,
 
 case class Newsletter(newsletter_id: NewsletterId, date_published: LocalDate, title: String, url: String, image_src: String) {
   val slug = Slug.fromString(title)
-  val path = s"/newsletter/${slug.toString}"
+  val path = routes.Wildvision.newsletter(slug.toString).url
 }
 
 case class FilmTag(film_id: FilmId, tag: Tag, ft_lastupdated: DateTime)

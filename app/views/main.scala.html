@@ -30,25 +30,25 @@
     <body>
         <menu>
             <div class="centred">
-                <a href="/" class="@homeClass">Home</a>
-                <a href="/films" class="@if(listing == "film"){selected-submenu}">Films</a>
-                <a href="/presenters" class="@if(listing == "presenter"){selected}">Presenters</a>
-                <a href="/blog" class="@if(listing == "blog"){selected}">Blog</a>
-                <a href="/subscribe" class="@if(listing == "subscribe" || listing == "newsletter"){selected}">Subscribe</a>
-                <a href="/search" class="@if(listing == "search"){selected}">Search</a>
-                <a href="/backstage" class="@if(listing == "backstage"){selected}">Backstage</a>
+                <a href="@routes.Wildvision.index().url" class="@homeClass">Home</a>
+                <a href="@routes.Wildvision.top10MostRecentFilms().url" class="@if(listing == "film"){selected-submenu}">Films</a>
+                <a href="@routes.Wildvision.presenters().url" class="@if(listing == "presenter"){selected}">Presenters</a>
+                <a href="@routes.Wildvision.blogHomepage().url" class="@if(listing == "blog"){selected}">Blog</a>
+                <a href="@routes.Wildvision.subscribe().url" class="@if(listing == "subscribe" || listing == "newsletter"){selected}">Subscribe</a>
+                <a href="@routes.Wildvision.search(None).url" class="@if(listing == "search"){selected}">Search</a>
+                <a href="@routes.Backstage.index().url" class="@if(listing == "backstage"){selected}">Backstage</a>
             </div>
             @if(subnav != "") {
                 <menu>
                 @if(listing == "film") {
                     <div class="centred">
-                        <a href="/films/all" class="@if(subnav == "all") {selected}">All</a>
-                        <a href="/films" class="@if(subnav == "latest") {selected}">Latest</a>
-                        <a href="/films/trending" class="@if(subnav == "trending") {selected}">Trending</a>
-                        <a href="/films/popular" class="@if(subnav == "popular") {selected}">Popular</a>
-                        <a href="/films/longest" class="@if(subnav == "longest") {selected}">Longest</a>
-                        <a href="/films/shortest" class="@if(subnav == "shortest") {selected}">Shortest</a>
-                        <a href="/films/tagged" class="@if(subnav == "tagged") {selected}">Tagged</a>
+                        <a href="@routes.Wildvision.films().url" class="@if(subnav == "all") {selected}">All</a>
+                        <a href="@routes.Wildvision.top10MostRecentFilms().url" class="@if(subnav == "latest") {selected}">Latest</a>
+                        <a href="@routes.Wildvision.top10TrendingFilms().url" class="@if(subnav == "trending") {selected}">Trending</a>
+                        <a href="@routes.Wildvision.top10MostPopularFilms().url" class="@if(subnav == "popular") {selected}">Popular</a>
+                        <a href="@routes.Wildvision.top10LongestFilms().url" class="@if(subnav == "longest") {selected}">Longest</a>
+                        <a href="@routes.Wildvision.top10ShortestFilms().url" class="@if(subnav == "shortest") {selected}">Shortest</a>
+                        <a href="@routes.Wildvision.filmsTagged().url" class="@if(subnav == "tagged") {selected}">Tagged</a>
                     </div>
                 }
                 </menu>
@@ -69,10 +69,10 @@
         </footer>
         <menu>
             <div class="centred">
-                <a href="/about" class="about-tab">About</a>
-                <a href="/privacy">Privacy</a>
-                <a href="/cookies">Cookies</a>
-                <a href="/sitemap">Sitemap</a>
+                <a href="@routes.Wildvision.about().url" class="about-tab">About</a>
+                <a href="@routes.Wildvision.privacy().url">Privacy</a>
+                <a href="@routes.Wildvision.cookies().url">Cookies</a>
+                <a href="@routes.Wildvision.sitemap().url">Sitemap</a>
             </div>
         </menu>
         <script src="@routes.Assets.at("javascripts/jquery-3.1.1.min.js")"></script>

@@ -37,7 +37,7 @@
         <section class="top-10-film-tags">
             <h3>Top 10 Film Tags:</h3>
             @top10Tags.map { filmTagCount =>
-                <film-tag><a href="/films/tagged/with/@{filmTagCount.tag}" title="@filmTagCount.size films">#@filmTagCount.tag</a></film-tag>
+                <film-tag><a href="@routes.Wildvision.filmsTaggedWith(filmTagCount.tag).url" title="@filmTagCount.size films">#@filmTagCount.tag</a></film-tag>
             }
         </section>
     }
@@ -45,7 +45,7 @@
         <section class="all-film-tags">
             <h3>All Film Tags:</h3>
             @filmTagCounts.map { filmTagCount =>
-                <film-tag><a href="/films/tagged/with/@{filmTagCount.tag}" title="@filmTagCount.size films" style="font-size: 1.@{filmTagCount.size}em">#@filmTagCount.tag</a></film-tag>
+                <film-tag><a href="@routes.Wildvision.filmsTaggedWith(filmTagCount.tag).url" title="@filmTagCount.size films" style="font-size: 1.@{filmTagCount.size}em">#@filmTagCount.tag</a></film-tag>
             }
         </section>
     }

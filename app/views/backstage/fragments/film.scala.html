@@ -4,28 +4,37 @@
 @import views.backstage.BackstageView.lastUpdatedDateTimePattern
 @import views.backstage.BackstageView.inputHidden
 @(film: Film, filmForm: Form[Film])(implicit messages: Messages)
-<h3>@film.film_name</h3>
-<i>Last updated: @film.f_lastupdated.toString(DateTimeFormat.mediumDateTime())</i>
-@form(action = routes.Backstage.updateFilm()) {
-    @inputHidden(filmForm("film_id"))
-    <input type="hidden" name="f_lastupdated" value="@now.toString(lastUpdatedDateTimePattern)"/>
-    @select(field = filmForm("live"), options = Seq("0" -> "Inactive", "1" -> "Live"), '_default -> "Please choose...")
-    @inputDate(field = filmForm("film_published_date"))
-    @inputText(field = filmForm("film_name"))
-    @inputText(field = filmForm("film_image"))
-    @select(
-        field = filmForm("film_host"),
-        options = Seq(
-            "VIMEO" -> "Vimeo",
-            "WILDVISION" -> "Wildvision.tv",
-            "YOUTUBE" -> "YouTube"
-        ),
-        '_default -> "Please choose..."
-    )
-    @inputText(field = filmForm("film_host_id"))
-    @inputText(field = filmForm("duration"))
-    @inputText(field = filmForm("latitude"))
-    @inputText(field = filmForm("longitude"))
-    @textarea(field = filmForm("film_description"), args = 'rows -> 8)
-    <input type="submit" value="Update Film"/>
-}
+<div id="@filmForm("film_id").value.mkString">
+    <h3>@film.film_name</h3>
+    <i>Last updated: @film.f_lastupdated.toString(DateTimeFormat.mediumDateTime())</i>
+    @form(action = routes.Backstage.updateFilm().withFragment(filmForm("film_id").value.mkString)) {
+        @inputHidden(filmForm("film_id"))
+        <input type="hidden" name="f_lastupdated" value="@now.toString(lastUpdatedDateTimePattern)"/>
+        @select(
+            field = filmForm("live"),
+            options = Seq(
+                "0" -> "Inactive",
+                "1" -> "Live"
+            ),
+            '_default -> "Please choose..."
+        )
+        @inputDate(field = filmForm("film_published_date"))
+        @inputText(field = filmForm("film_name"))
+        @inputText(field = filmForm("film_image"))
+        @select(
+            field = filmForm("film_host"),
+            options = Seq(
+                "VIMEO" -> "Vimeo",
+                "WILDVISION" -> "Wildvision.tv",
+                "YOUTUBE" -> "YouTube"
+            ),
+            '_default -> "Please choose..."
+        )
+        @inputText(field = filmForm("film_host_id"))
+        @inputText(field = filmForm("duration"))
+        @inputText(field = filmForm("latitude"))
+        @inputText(field = filmForm("longitude"))
+        @textarea(field = filmForm("film_description"), args = 'rows -> 8)
+        <input type="submit" value="Update Film"/>
+    }
+</div>

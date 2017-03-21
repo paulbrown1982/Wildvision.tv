@@ -18,7 +18,7 @@
         <p>@filmView.duration</p>
         <h3>Tags:</h3>
         @filmView.tags.map { filmTag =>
-            <film-tag><a href="/films/tagged/with/@filmTag.tag">#@filmTag.tag</a></film-tag>
+            <film-tag><a href="@routes.Wildvision.filmsTaggedWith(filmTag.tag).url">#@filmTag.tag</a></film-tag>
         }
     </details>
     <div class="film-presenters">

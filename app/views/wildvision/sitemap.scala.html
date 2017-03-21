@@ -5,13 +5,13 @@
         <section>
             <h3>Home</h3>
             <ul>
-                <li><a title="Wildvision.tv Editor's Choice" href="/">Editor's Choice</a></li>
+                <li><a title="Wildvision.tv Editor's Choice" href="@routes.Wildvision.index().url">Editor's Choice</a></li>
             </ul>
         </section>
         <section>
             <h3>Blog</h3>
             <ul>
-                <li><a title="Wildvision.tv Blog" href="/blog">Wildvision.tv Blog</a></li>
+                <li><a title="Wildvision.tv Blog" href="@routes.Wildvision.blogHomepage().url">Wildvision.tv Blog</a></li>
             </ul>
         </section>
         <section>
@@ -36,14 +36,14 @@
             <h3>Film tags</h3>
             <ul>
             @for(tagName <- tagNames) {
-                <li><a title="Wildvision.tv Films tagged with: @tagName" href="/films/tagged/with/@tagName">@tagName</a></li>
+                <li><a title="Wildvision.tv Films tagged with: @tagName" href="@routes.Wildvision.filmsTaggedWith(tagName).url">@tagName</a></li>
             }
             </ul>
         </section>
         <section>
             <h3>Subscribe</h3>
             <ul>
-                <li><a title="Subscribe to Wildvision.tv" href="/subscribe">Subscribe to Wildvision.tv</a></li>
+                <li><a title="Subscribe to Wildvision.tv" href="@routes.Wildvision.subscribe().url">Subscribe to Wildvision.tv</a></li>
                 <li>
                     <h3>Newsletter Archives</h3>
                     <ul>
@@ -59,7 +59,7 @@
         <section>
             <h3>Search</h3>
             <ul>
-                <li><a title="Search Wildvision.tv" href="/search">Search Wildvision.tv</a></li>
+                <li><a title="Search Wildvision.tv" href="@routes.Wildvision.search(None).url">Search Wildvision.tv</a></li>
             </ul>
         </section>
     </article>

@@ -9,7 +9,7 @@ import views.backstage.BackstageView
 import views.wildvision.RenderedView
 
 import scala.concurrent.duration._
-import scala.concurrent.ExecutionContext.Implicits.global
+import play.api.libs.concurrent.Execution.Implicits.defaultContext
 
 object Loader {
 

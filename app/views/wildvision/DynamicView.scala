@@ -2,6 +2,7 @@ package views.wildvision
 
 import models.Types.UnsafeTag
 import models._
+import play.twirl.api.Html
 import views._
 
 import scala.collection.immutable.Seq.empty
@@ -28,9 +29,9 @@ class DynamicView(filmViews: Seq[FilmView] = empty,
 
   private val searchBase = html.wildvision.search(None)
 
-  def cookies(optout: Boolean, dnt: Boolean) = html.wildvision.cookies(optout, dnt)
+  def cookies(optout: Boolean, dnt: Boolean): Html = html.wildvision.cookies(optout, dnt)
 
-  def filmsWithTag(tagOpt: Option[String]) = {
+  def filmsWithTag(tagOpt: Option[String]): Html = {
     tagOpt.fold(searchBase) { unsafeTagString =>
       val unsafeTag = new UnsafeTag(unsafeTagString)
       val safeTag = unsafeTag.getSafeTag
@@ -40,7 +41,7 @@ class DynamicView(filmViews: Seq[FilmView] = empty,
     }
   }
 
-  def search(q: Option[String]) = {
+  def search(q: Option[String]): Html = {
     q.fold(searchBase) { query =>
       val sanitised = if (query.trim.length > 2) Some(query.trim.toLowerCase) else None
       sanitised.fold(searchBase) { needle =>

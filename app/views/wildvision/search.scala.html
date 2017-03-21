@@ -4,7 +4,7 @@
 
 @main("Search Wildvision.tv", "", "search") {
     @results.fold {
-        <form action="/search" method="GET">
+        <form action="@routes.Wildvision.search(None).url" method="GET">
             <input name="q" type="text" placeholder="e.g. osprey"/>
             <input type="submit" value="Search"/>
         </form>

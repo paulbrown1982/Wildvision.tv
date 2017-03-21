@@ -21,23 +21,28 @@ import scala.concurrent.{ExecutionContext, Future}
 @Singleton
 class ExpiresFilter @Inject()(implicit override val mat: Materializer, exec: ExecutionContext) extends Filter {
 
-  val RFC1123_DATE_TIME_FORMATTER = DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss 'GMT'").withZoneUTC()
-
-  private def isGETorOPTIONS(requestHeader: RequestHeader) =
-    requestHeader.method == "OPTIONS" || requestHeader.method == "GET"
+  private val RFC1123_DATE_TIME_FORMATTER = DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss 'GMT'").withZoneUTC()
 
   override def apply(nextFilter: RequestHeader => Future[Result])
            (requestHeader: RequestHeader): Future[Result] = {
 
     nextFilter(requestHeader) map { result =>
-      wildvisionView.lastUpdated map { u =>
-        if (!result.header.headers.contains("Cache-Control") && result.header.status == 200 && isGETorOPTIONS(requestHeader)) {
-          result withHeaders "Expires" -> u.plusSeconds(interval).toString(RFC1123_DATE_TIME_FORMATTER)
-        } else {
-          result
-        }
-      } getOrElse result
+      if (isEligible(requestHeader, result.header)) resultWithLastUpdated(result) else result
     }
   }
+
+  private def resultWithLastUpdated(result: Result) = {
+    wildvisionView.lastUpdated map { lastUpdated =>
+      result withHeaders "Expires" -> lastUpdated.plusSeconds(interval).toString(RFC1123_DATE_TIME_FORMATTER)
+    } getOrElse result
+  }
+
+  private def isEligible(requestHeader: RequestHeader, responseHeader: ResponseHeader) = {
+    isGETorOPTIONS(requestHeader) && responseHeader.status == 200 && !responseHeader.headers.contains("Cache-Control")
+  }
+
+  private def isGETorOPTIONS(requestHeader: RequestHeader) =
+    requestHeader.method == "OPTIONS" || requestHeader.method == "GET"
+
 
 }

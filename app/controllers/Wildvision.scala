@@ -9,13 +9,13 @@ import play.api.mvc.{Action, Controller, Cookie}
 import play.twirl.api.Html
 import services.InsightService._
 import services.Loader.wildvisionView
-import scala.concurrent.ExecutionContext.Implicits.global
+import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import scala.util.Try
 
 class Wildvision @Inject()(implicit db: Database, ws: WSClient) extends Controller {
 
   def index = Action { request =>
-    wildvisionView.editorsChoiceFilm.map { f => Ok(f) } getOrElse Redirect("/films", TEMPORARY_REDIRECT)
+    wildvisionView.editorsChoiceFilm.map { f => Ok(f) } getOrElse Redirect(routes.Wildvision.films().url, TEMPORARY_REDIRECT)
   }
 
   def about = Action { request =>
